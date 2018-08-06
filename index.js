@@ -1,5 +1,6 @@
 const Eris = require(`eris`);
 const client = new Eris('');
+let newSnap = 0;
 
 client.on(`ready`, () => {
     console.log(`Ouch my bones`);
@@ -16,6 +17,20 @@ client.on(`messageCreate`, (m) => {
         snap(m)
         }
     }
+});
+
+client.on(`guildMemberAdd`, (guild, member) => {
+    if (newSnap === 0) {
+        member.addRole(`474810765694730242`, 'They got snapped my doggy.');
+        client.getChannel(`474267235834134531`).createMessage(`${member.username} has become a child of Thanos`);
+        client.getChannel(`476101379971088385`).createMessage(`${member.username} has just joined the server and was snapped.`);
+        newSnap = 1;
+    } else {
+        member.addRole(`474810815695028249`);
+        newSnap = 0;
+        client.getChannel(`476101420345720833`).createMessage(`${member.username} has just joined the server and was spared.`);
+    }
+
 });
 
 client.connect();
@@ -37,13 +52,12 @@ function snap(msg) {
     if (banees.length !== count)
         getRandomFucker(members, banees);
 
-        // The Timeout doesn't work like it should. No clue why worked before.
         msg.channel.guild.members.forEach((member, i) => {
             if (banees.includes(member)) {
             setTimeout(() => {
             member.addRole(`474810765694730242`, 'They got snapped my doggy.');
 
-            client.getChannel(`476101379971088385`).createMessage(`${member.username}, alas you have become a child of Thanos and have been snapped. Your sacrifice shall not be in vain. I will create a better universe for us all.`);
+            client.getChannel(`476101379971088385`).createMessage(`${member}, alas you have become a child of Thanos and have been snapped. Your sacrifice shall not be in vain. I will create a better universe for us all.`);
             client.getChannel(`474267235834134531`).createMessage(`${member.username} has become a child of Thanos`)
             }, i * 5000)
         } else {
