@@ -1,0 +1,14 @@
+{
+  "name": "thanos",
+  "version": "1.0.0",
+  "description": "Getting snapped",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Wiggin",
+  "license": "MIT",
+  "dependencies": {
+    "eris": "^0.8.6"
+  }
+}
